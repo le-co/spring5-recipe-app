@@ -30,6 +30,12 @@
         </section>
 
         <section>
+            <h4>Direção</h4>
+            <hr>
+            <p th:text="${recipe.directions}"></p>
+        </section>
+
+        <section>
             <h4>Ingredientes</h4>
             <hr>
             <ul th:each="ingredient : ${recipe.ingredients}">
