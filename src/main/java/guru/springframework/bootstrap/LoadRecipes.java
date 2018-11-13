@@ -88,6 +88,7 @@ public class LoadRecipes implements CommandLineRunner {
         Ingredient ingredient = new Ingredient();
         ingredient.setDescription("ripe avocados");
         ingredient.setAmount(new BigDecimal(2));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Ounce").get());
 
         recipe.addIngredients(ingredient);
@@ -95,6 +96,7 @@ public class LoadRecipes implements CommandLineRunner {
         ingredient = new Ingredient();
         ingredient.setDescription("teaspoon Kosher salt");
         ingredient.setAmount(new BigDecimal(0.5));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Teaspoon").get());
 
         recipe.addIngredients(ingredient);
@@ -102,6 +104,7 @@ public class LoadRecipes implements CommandLineRunner {
         ingredient = new Ingredient();
         ingredient.setDescription("Tbsp of fresh lime juice or lemon juice");
         ingredient.setAmount(new BigDecimal(1));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Tablespoon").get());
 
         recipe.addIngredients(ingredient);
@@ -109,6 +112,7 @@ public class LoadRecipes implements CommandLineRunner {
         ingredient = new Ingredient();
         ingredient.setDescription("Tbsp");
         ingredient.setAmount(new BigDecimal(2));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Tablespoon").get());
 
         recipe.addIngredients(ingredient);
@@ -116,6 +120,7 @@ public class LoadRecipes implements CommandLineRunner {
         ingredient = new Ingredient();
         ingredient.setDescription("minced red onion or thinly sliced green onion");
         ingredient.setAmount(new BigDecimal(0.25));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Cup").get());
 
         recipe.addIngredients(ingredient);
@@ -123,6 +128,7 @@ public class LoadRecipes implements CommandLineRunner {
         ingredient = new Ingredient();
         ingredient.setDescription("minced red onion or thinly sliced green onion");
         ingredient.setAmount(new BigDecimal(0.25));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Cup").get());
 
         recipe.addIngredients(ingredient);
@@ -130,6 +136,7 @@ public class LoadRecipes implements CommandLineRunner {
         ingredient = new Ingredient();
         ingredient.setDescription("serrano chiles, stems and seeds removed, minced");
         ingredient.setAmount(new BigDecimal(2));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Ounce").get());
 
         recipe.addIngredients(ingredient);
@@ -137,6 +144,7 @@ public class LoadRecipes implements CommandLineRunner {
         ingredient = new Ingredient();
         ingredient.setDescription("cilantro (leaves and tender stems), finely chopped");
         ingredient.setAmount(new BigDecimal(2));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Tablespoon").get());
 
         recipe.addIngredients(ingredient);
@@ -144,6 +152,7 @@ public class LoadRecipes implements CommandLineRunner {
         ingredient = new Ingredient();
         ingredient.setDescription("dash of freshly grated black pepper");
         ingredient.setAmount(new BigDecimal(1));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Ounce").get());
 
         recipe.addIngredients(ingredient);
@@ -151,6 +160,7 @@ public class LoadRecipes implements CommandLineRunner {
         ingredient = new Ingredient();
         ingredient.setDescription("ripe tomato, seeds and pulp removed, chopped");
         ingredient.setAmount(new BigDecimal(0.5));
+        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Ounce").get());
 
         recipe.addIngredients(ingredient);
@@ -173,6 +183,8 @@ public class LoadRecipes implements CommandLineRunner {
         this.notesRepository.save(notes);
 
         log.debug("Create note associated the recipe {} ", recipe.getName());
+
+        System.out.println("Finish load data");
     }
 
 }
