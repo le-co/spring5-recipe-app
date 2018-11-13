@@ -1,8 +1,11 @@
 package guru.springframework.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 public class Category {
 
@@ -12,30 +15,7 @@ public class Category {
 
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Recipe> recipes;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
 }

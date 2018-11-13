@@ -4,6 +4,7 @@ import guru.springframework.domain.Category;
 import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 /**
  * Created by jt on 6/1/17.
  */
+@Slf4j
 @Controller
 public class IndexController {
 
@@ -27,14 +29,10 @@ public class IndexController {
     public String getIndexPage(){
 
         Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
-        if(categoryOptional.isPresent()){
-            System.out.println("Category id : "+ categoryOptional.get().getDescription());
-        }
+        log.debug("Category exists {}", categoryOptional.isPresent());
 
         Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Teaspoon");
-        if(unitOfMeasure.isPresent()){
-            System.out.println("Unit of Measure id : "+ unitOfMeasure.get().getDescription());
-        }
+        log.debug("Unit measure exists {}", unitOfMeasure.isPresent());
 
         return "index";
     }

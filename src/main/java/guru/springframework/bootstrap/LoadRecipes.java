@@ -8,6 +8,7 @@ import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.NotesRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 @Component
 public class LoadRecipes implements CommandLineRunner {
 
@@ -86,86 +88,76 @@ public class LoadRecipes implements CommandLineRunner {
         Ingredient ingredient = new Ingredient();
         ingredient.setDescription("ripe avocados");
         ingredient.setAmount(new BigDecimal(2));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Ounce").get());
 
-        ingredients.add(ingredient);
+        recipe.addIngredients(ingredient);
 
         ingredient = new Ingredient();
         ingredient.setDescription("teaspoon Kosher salt");
         ingredient.setAmount(new BigDecimal(0.5));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Teaspoon").get());
 
-        ingredients.add(ingredient);
+        recipe.addIngredients(ingredient);
 
         ingredient = new Ingredient();
         ingredient.setDescription("Tbsp of fresh lime juice or lemon juice");
         ingredient.setAmount(new BigDecimal(1));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Tablespoon").get());
 
-        ingredients.add(ingredient);
+        recipe.addIngredients(ingredient);
 
         ingredient = new Ingredient();
         ingredient.setDescription("Tbsp");
         ingredient.setAmount(new BigDecimal(2));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Tablespoon").get());
 
-        ingredients.add(ingredient);
+        recipe.addIngredients(ingredient);
 
         ingredient = new Ingredient();
         ingredient.setDescription("minced red onion or thinly sliced green onion");
         ingredient.setAmount(new BigDecimal(0.25));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Cup").get());
 
-        ingredients.add(ingredient);
+        recipe.addIngredients(ingredient);
 
         ingredient = new Ingredient();
         ingredient.setDescription("minced red onion or thinly sliced green onion");
         ingredient.setAmount(new BigDecimal(0.25));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Cup").get());
 
-        ingredients.add(ingredient);
+        recipe.addIngredients(ingredient);
 
         ingredient = new Ingredient();
         ingredient.setDescription("serrano chiles, stems and seeds removed, minced");
         ingredient.setAmount(new BigDecimal(2));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Ounce").get());
 
-        ingredients.add(ingredient);
+        recipe.addIngredients(ingredient);
 
         ingredient = new Ingredient();
         ingredient.setDescription("cilantro (leaves and tender stems), finely chopped");
         ingredient.setAmount(new BigDecimal(2));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Tablespoon").get());
 
-        ingredients.add(ingredient);
+        recipe.addIngredients(ingredient);
 
         ingredient = new Ingredient();
         ingredient.setDescription("dash of freshly grated black pepper");
         ingredient.setAmount(new BigDecimal(1));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Ounce").get());
 
-        ingredients.add(ingredient);
+        recipe.addIngredients(ingredient);
 
         ingredient = new Ingredient();
         ingredient.setDescription("ripe tomato, seeds and pulp removed, chopped");
         ingredient.setAmount(new BigDecimal(0.5));
-        ingredient.setRecipe(recipe);
         ingredient.setUom(this.unitOfMeasureRepository.findByDescription("Ounce").get());
 
-        ingredients.add(ingredient);
-
-        recipe.setIngredients(ingredients);
+        recipe.addIngredients(ingredient);
 
         Recipe recipeSaved = this.recipeRepository.save(recipe);
+
+        log.debug("save recipe on database");
 
         Notes notes = new Notes();
 
@@ -179,6 +171,8 @@ public class LoadRecipes implements CommandLineRunner {
         notes.setRecipe(recipeSaved);
 
         this.notesRepository.save(notes);
+
+        log.debug("Create note associated the recipe {} ", recipe.getName());
     }
 
 }
