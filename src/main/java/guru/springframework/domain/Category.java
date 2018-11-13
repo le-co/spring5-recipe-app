@@ -16,7 +16,7 @@ public class Category {
 
     private String description;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
 
 }
