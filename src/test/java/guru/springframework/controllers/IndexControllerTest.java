@@ -12,6 +12,8 @@ import java.util.HashSet;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anySet;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,7 +43,7 @@ public class IndexControllerTest {
         when(recipeService.getRecipes()).thenReturn(recipes);
 
         String result = this.indexController.getIndexPage(model);
-        verify(model, times(1)).addAttribute("recipes", recipes);
+        verify(model, times(1)).addAttribute(eq("recipes"), anySet());
         assertEquals("index", result);
     }
 
