@@ -46,7 +46,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if (!recipeOptional.isPresent()) {
-            throw new NotFoundResultException("Recipe not Found!");
+            throw new NotFoundResultException(String.format("Recipe %s not Found!", l.toString()));
         }
 
         return recipeOptional.get();
@@ -55,11 +55,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @Transactional
     public RecipeCommand findCommandById(Long l) {
-        Optional<Recipe> recipe = this.recipeRepository.findById(l);
-        if (!recipe.isPresent()) {
-            throw new NotFoundResultException("Recipe does not found");
-        }
-        return recipeToRecipeCommand.convert(recipe.get());
+        return recipeToRecipeCommand.convert(this.findById(l));
     }
 
     @Override
