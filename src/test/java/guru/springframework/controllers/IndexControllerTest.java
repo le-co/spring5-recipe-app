@@ -1,6 +1,7 @@
 package guru.springframework.controllers;
 
 import guru.springframework.domain.Recipe;
+import guru.springframework.exceptions.ControllerAdviceException;
 import guru.springframework.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +43,9 @@ public class IndexControllerTest {
 
     @Test
     public void testMockMVC() throws Exception {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ControllerAdviceException())
+                .build();
 
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
