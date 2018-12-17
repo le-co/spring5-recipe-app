@@ -63,9 +63,19 @@ public class RecipeController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundResultException.class)
     public ModelAndView notFound(Exception ex) {
-        log.error(ex.getMessage());
+        log.error("Not found result {}", ex.getMessage());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("404");
+        modelAndView.addObject("exception", ex);
+        return modelAndView;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView badRequest(Exception ex) {
+        log.error("The parameter informed does not number", ex.getMessage());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("400");
         modelAndView.addObject("exception", ex);
         return modelAndView;
     }
